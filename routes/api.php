@@ -16,13 +16,23 @@ use App\Http\Controllers\ApiloginController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+   
+   
+    Route::post('/logout', [ApiloginController::class, 'logout']);
 });
 
-Route::get('products', [ProductController::class, 'index']);
-Route::get('create-token', [ApiloginController::class, 'createtoken']);
 
+Route::get('create-token', [ApiloginController::class, 'createtoken']);
+Route::get('products', [ProductController::class, 'index']);
 Route::post('login', [ApiloginController::class, 'login']);
 Route::post('register', [ApiloginController::class, 'register']);
 

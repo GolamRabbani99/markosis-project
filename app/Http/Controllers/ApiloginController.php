@@ -60,5 +60,12 @@ class ApiloginController extends Controller
         ]);
     }
 
+    public function logout()
+    {
+        auth()->user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
 
+        return response()->json('Logged out successfully', 200);
+    }
 }

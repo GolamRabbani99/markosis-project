@@ -1969,6 +1969,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1989,6 +2000,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    }
+  },
+  computed: {
+    totalProduct: function totalProduct() {
+      return this.products.reduce(function (sum, product) {
+        return sum + product.quantity;
+      }, 0);
     }
   }
 });
@@ -37601,15 +37619,29 @@ var render = function() {
               return _c("tr", { key: product.id }, [
                 _c("td", [_vm._v(_vm._s(product.id))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(product.product_name))]),
+                _c("td", [
+                  _vm._v(
+                    " " +
+                      _vm._s(product.product_name) +
+                      " | " +
+                      _vm._s(product.quantity) +
+                      " "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  product.quantity === 0
+                    ? _c("span", { staticClass: "btn btn-danger" }, [
+                        _vm._v("\n       - out of stock\n     ")
+                      ])
+                    : _vm._e()
+                ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(product.product_code))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(product.unit_buying_cost))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(product.unit_selling_cost))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(product.quantity))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(product.tax_rate))]),
                 _vm._v(" "),
@@ -37620,6 +37652,10 @@ var render = function() {
             }),
             0
           )
+        ]),
+        _vm._v(" "),
+        _c("h4", { staticClass: "text-success" }, [
+          _vm._v("Total Product:" + _vm._s(_vm.totalProduct))
         ])
       ])
     ]
@@ -37632,7 +37668,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
       _c("h2", { staticClass: "btn btn-primary" }, [
-        _vm._v("best Product Information")
+        _vm._v("Total Product Information")
       ])
     ])
   },
@@ -37644,17 +37680,19 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Product Name")]),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("products Name and Quantity ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Product Code")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Buying cost")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit Buying cost $")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit selling cost")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Unit selling cost $")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Quantity")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tax Rate")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tax Rate %")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Created Date")]),
         _vm._v(" "),
